@@ -32,8 +32,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity eight_bit_adder is
-    Port ( i_A : in STD_LOGIC_VECTOR (7 downto 0);
-           i_B : in STD_LOGIC_VECTOR (7 downto 0);
+    Port ( i_op1 : in STD_LOGIC_VECTOR (7 downto 0);
+           i_op2 : in STD_LOGIC_VECTOR (7 downto 0);
            i_Cin : in STD_LOGIC;
            o_S : out STD_LOGIC_VECTOR (7 downto 0);
            o_Cout : out STD_LOGIC);
@@ -58,8 +58,8 @@ begin
     -- Port maps
     ripple_adder_1: ripple_adder
     port map(
-        A     => i_A(3 downto 0),
-        B     => i_B(3 downto 0),
+        A     => i_op1(3 downto 0),
+        B     => i_op2(3 downto 0),
         Cin   => i_Cin,             -- Direct to ALUControl0
         S     => o_S(3 downto 0),
         Cout  => w_carry
@@ -67,8 +67,8 @@ begin
     
     ripple_adder_2: ripple_adder
     port map(
-        A     => i_A(7 downto 4),
-        B     => i_B(7 downto 4),
+        A     => i_op1(7 downto 4),
+        B     => i_op2(7 downto 4),
         Cin   => w_carry,             -- From ripple adder 1
         S     => o_S(7 downto 4),
         Cout  => o_Cout
