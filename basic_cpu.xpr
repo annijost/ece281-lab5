@@ -144,23 +144,19 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/ECE/ece281-ice3/src/full_adder.vhd">
+      <File Path="$PPRDIR/src/full_adder.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../ece281-ice3/src/full_adder.vhd"/>
-          <Attr Name="ImportTime" Val="1770654627"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/ECE/ece281-ice3/src/ripple_adder.vhd">
+      <File Path="$PPRDIR/src/ripple_adder.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../ece281-ice3/src/ripple_adder.vhd"/>
-          <Attr Name="ImportTime" Val="1777427150"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../ece281-lab4/src/sevenseg_decoder.vhd">
+      <File Path="$PPRDIR/src/sevenseg_decoder.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
