@@ -130,10 +130,8 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/src/counter.vhd">
+      <File Path="$PPRDIR/src/counter.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/src/counter.vhd"/>
-          <Attr Name="ImportTime" Val="1777391272"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -162,10 +160,8 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/src/sevenseg_decoder.vhd">
+      <File Path="$PPRDIR/../ece281-lab4/src/sevenseg_decoder.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../ece281-lab4/src/sevenseg_decoder.vhd"/>
-          <Attr Name="ImportTime" Val="1773722377"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -178,10 +174,8 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/ECE/ece281-lab5/src/top_basys3.vhd">
+      <File Path="$PPRDIR/src/top_basys3.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/src/top_basys3.vhd"/>
-          <Attr Name="ImportTime" Val="1777567757"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
