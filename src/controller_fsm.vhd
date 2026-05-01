@@ -48,34 +48,32 @@ end controller_fsm;
 architecture FSM of controller_fsm is
 
     -- register signals with default CLEAR
-	signal f_Q: std_logic_vector(1 downto 0):="00";
-	signal f_Q_next: std_logic_vector(1 downto 0):="00";
+	signal f_Q: std_logic_vector(3 downto 0):="0001";
+	signal f_Q_next: std_logic_vector(3 downto 0):="0000";
 
 begin
 
     -- next state logic
-    f_Q_next(0) <= ( (not f_Q(1)) and (not f_Q(0)) and i_adv )
-                    or ( f_Q(0) and (not i_adv) )
-                    or ( f_Q(1) and (not f_Q(0)) and i_adv );
-    f_Q_next(1) <= ( (not f_Q(1)) and f_Q(0) and i_adv )
-                    or ( f_Q(1) and (not i_adv) )
-                    or ( f_Q(1) and (not f_Q(0)) and i_adv );
-                    
+    f_Q_next(3) <= (f_Q(2) and i_adv) or (f_Q(3) and (not i_adv));
+    f_Q_next(2) <= (f_Q(1) and i_adv) or (f_Q(2) and (not i_adv));
+    f_Q_next(1) <= (f_Q(0) and i_adv) or (f_Q(1) and (not i_adv));
+    f_Q_next(0) <= (f_Q(3) and i_adv) or (f_Q(0) and (not i_adv));
+      
     -- output logic
-    o_cycle(0)  <= (not f_Q(1)) and (not f_Q(0));
-    o_cycle(1)  <= (not f_Q(1)) and f_Q(0);
-    o_cycle(2)  <= f_Q(1) and (not f_Q(0));
-    o_cycle(3)  <= f_Q(1) and f_Q(0);
+    o_cycle(0)  <= f_Q(0);
+    o_cycle(1)  <= f_Q(1);
+    o_cycle(2)  <= f_Q(2);
+    o_cycle(3)  <= f_Q(3);
     
     -- state register process
     register_proc : process (i_adv)
 	begin
-	    if (rising_edge(i_adv)) then
-	        if i_reset = '1' then
-	           f_Q <= "00";            -- reset state is CLEAR
-	        else
-	           f_Q <= f_Q_next;        -- next state becomes current state
-	        end if;                
+	    if i_reset = '1' then
+	       f_Q <= "0001";              -- reset state is clear
+	    elsif rising_edge(i_adv) then
+	       f_Q <= f_Q_next;            -- next state
+	    else
+	       f_Q <= f_Q;                 -- no change
 	    end if;
 	end process register_proc;
 

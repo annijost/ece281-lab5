@@ -115,15 +115,15 @@ architecture top_basys3_arch of top_basys3 is
     end component sevenseg_decoder;
     
     -- Signal declarations
-    
     signal w_clk_TDM, w_adv, w_sign: std_logic;
-    signal w_cycle, w_flags, w_hund, w_tens, w_ones, w_data, w_sel, w_an: std_logic_vector(3 downto 0);
+    signal w_cycle, w_flags_0, w_flags_1: std_logic_vector(3 downto 0);
+    signal w_hund, w_tens, w_ones, w_data, w_sel: std_logic_vector(3 downto 0);
     signal w_result, w_mux1_out: std_logic_vector(7 downto 0);
-    signal w_seg_n, w_sign_seg, w_seg_out: std_logic_vector(6 downto 0);
+    signal w_seg_n, w_sign_seg: std_logic_vector(6 downto 0);
     
     -- creating register signals with default ZERO
-	signal w_A: std_logic_vector(7 downto 0):=x"00";
-	signal w_B: std_logic_vector(7 downto 0):=x"00"; 
+	signal w_A: std_logic_vector(7 downto 0);
+	signal w_B: std_logic_vector(7 downto 0); 
   
 begin
 	-- PORT MAPS ----------------------------------------
@@ -157,7 +157,7 @@ begin
 	        i_B      => w_B,
 	        i_op     => sw(2 downto 0),
 	        o_result => w_result,
-	        o_flags  => w_flags
+	        o_flags  => w_flags_0
 	    );
 	    
 	twos_comp_inst: twos_comp
@@ -171,7 +171,7 @@ begin
 	    
 	TDM4_inst: TDM4
 	    port map (
-	        i_D3    => x"0",  --this doesn't matter
+	        i_D3    => x"0",       -- doesn't matter  
 	        i_D2    => w_hund,
 	        i_D1    => w_tens,
 	        i_D0    => w_ones,
@@ -205,21 +205,24 @@ begin
 	                  
     -- Mux 3: anode control
     with w_cycle select
-        w_an    <= "1111" when "0001",  -- all anodes off
-                   w_sel when others;
+        an    <= "1111" when "0001",  -- all anodes off
+                 w_sel when others;
     
     -- Mux 4: segment control
     with w_sel select
-        w_seg_out <= w_sign_seg when "0111",    -- first display is sign
-                     w_seg_n when others;
+        seg <= w_sign_seg when "0111",    -- first display is sign
+               w_seg_n when others;
+               
+    -- Mux 5: flags only display on cycle 1000
+    with w_cycle select
+        w_flags_1 <= w_flags_0 when "1000",
+                     x"0" when others;
 	
 	-- CONCURRENT STATEMENTS ----------------------------
 	
 	led(3 downto 0)   <= w_cycle;
-	led(15 downto 12) <= w_flags;
+	led(15 downto 12) <= w_flags_1;
 	led(11 downto 4)  <= (others => '0');  -- unused LEDs grounded
-	
-	seg(6 downto 0)   <= w_seg_out;
 	
 	-- REGISTER PROCESSES -------------------------------
 	
