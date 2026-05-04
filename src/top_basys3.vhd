@@ -121,7 +121,7 @@ architecture top_basys3_arch of top_basys3 is
     signal w_result, w_mux1_out: std_logic_vector(7 downto 0);
     signal w_seg_n, w_sign_seg: std_logic_vector(6 downto 0);
     
-    -- creating register signals with default ZERO
+    -- creating register signals
 	signal w_A: std_logic_vector(7 downto 0);
 	signal w_B: std_logic_vector(7 downto 0); 
   
